@@ -611,7 +611,12 @@ ul {
 /*================================================
              9. EXPERIENCE SECTION
 ==================================================*/
-
+#skills{
+	color: #FFF;
+}
+.skill-area-content{
+	color: #FFF;
+}
 .experience-section {
     background:#37364B;
     position: relative;
@@ -667,6 +672,7 @@ ul {
 .progress-bar {
     background-color: #fb6930;
 }
+
 
 /*================================================
              10. SERVICES SECTION
