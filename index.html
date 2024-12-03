@@ -26,6 +26,414 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
 
+    <!-- Ajout des nouvelles bibliothèques d'animation -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
+    <style>
+        /* Animations personnalisées */
+        .skill-progress {
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #6b5b95, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 5s ease infinite;
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .services-text {
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .services-text:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: progress-shine 2s infinite;
+        }
+
+        @keyframes progress-shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Ajout d'effets de survol pour les services */
+        .services-content {
+            padding: 30px;
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            border-radius: 20px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .services-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .services-content img {
+            transition: transform 0.5s ease;
+        }
+
+        .services-content:hover img {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        /* Animation pour les sections */
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #6b5b95, #ff6b6b);
+            transition: width 0.3s ease;
+        }
+
+        .section-title:hover::after {
+            width: 100%;
+        }
+
+        /* Effet de brillance pour les boutons */
+        .about-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .about-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255,255,255,0.3),
+                transparent
+            );
+            transition: all 0.5s ease;
+        }
+
+        .about-btn:hover::before {
+            left: 100%;
+        }
+
+        .service-icon {
+            margin-bottom: 20px;
+            color: #6b5b95;
+            transition: all 0.3s ease;
+        }
+
+        .services-content:hover .service-icon {
+            transform: scale(1.1);
+            color: #ff6b6b;
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .service-list li {
+            margin-bottom: 8px;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .service-list li i {
+            color: #6b5b95;
+            margin-right: 10px;
+        }
+
+        .services-content:hover .service-list li {
+            transform: translateX(10px);
+            color: #333;
+        }
+
+        .services-content {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            border-radius: 20px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .services-content h3 {
+            margin: 15px 0;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .services-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .progress {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            height: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(45deg, #6b5b95, #ff6b6b);
+            height: 100%;
+        }
+
+        .skills-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            color: #333;
+            font-size: 2.5em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #6b5b95, #ff6b6b);
+            border-radius: 2px;
+        }
+
+        .skill-category {
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .skill-icon {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .skill-icon i {
+            font-size: 2.5em;
+            color: #6b5b95;
+            background: linear-gradient(135deg, #6b5b95, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover .skill-icon i {
+            transform: scale(1.1);
+        }
+
+        .skill-category h3 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .skill-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .skill-list li {
+            margin-bottom: 15px;
+            padding: 12px 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .skill-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-list li:hover {
+            background: #ffffff;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .skill-list li i.fa-check {
+            color: #6b5b95;
+            margin-right: 15px;
+            font-size: 0.9em;
+            background: rgba(107, 91, 149, 0.1);
+            padding: 8px;
+            border-radius: 50%;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .skill-list li span {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 992px) {
+            .skill-category {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .skills-section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 2em;
+                margin-bottom: 40px;
+            }
+
+            .skill-category {
+                padding: 25px;
+            }
+
+            .skill-list li {
+                padding: 10px 15px;
+            }
+        }
+
+        .cases-category {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .case-item {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(107, 91, 149, 0.1);
+        }
+
+        .case-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: rgba(107, 91, 149, 0.3);
+        }
+
+        .case-number {
+            display: block;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #6b5b95;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #6b5b95, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .case-item p {
+            margin: 0 0 8px 0;
+            color: #444;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .case-item small {
+            display: block;
+            color: #666;
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .cases-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .case-item {
+                padding: 15px;
+            }
+        }
+    </style>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142182733-1"></script>
@@ -136,16 +544,18 @@
     <!--============== END HEADER SECTION ===============-->
 
     <!--===== BANNER SECTION =====-->
-    <section id="home-banner" class="banner-section wow fadeInUp" data-wow-delay="0.2s">
+    <section id="home-banner" class="banner-section">
     <div id="particles-effects"></div>
         <div class="container">
             <div class="row">
-                <div class="col-md-12 col-lg-12 banner-text wow fadeInUp" data-wow-delay="0.4s">
-                    <h1>Pierre Buirette</h1>
-                    <br><br>
-                    <p>Web/Apps/Pwa/Python/JAVA <br>
-                    Developer</p>
-                    <br>
+                <div class="col-md-12 col-lg-12 banner-text" data-aos="fade-up" data-aos-duration="1000">
+                    <h1 class="gradient-text">Pierre Buirette</h1>
+                    <p class="floating">Développeur Full Stack Senior<br>
+                    Expert Web • Mobile • Cloud</p>
+                    <div class="banner-buttons" data-aos="fade-up" data-aos-delay="300">
+                        <a href="#contact" class="btn btn-primary mr-3">Me Contacter</a>
+                        <a href="#works" class="btn btn-outline-light">Voir mes Projets</a>
+                    </div>
                 </div>
                 <!--col-md-6-->
             </div>
@@ -160,10 +570,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-lg-6 about-text">
-                    <h3>a many drag and drop of me...</h3>
-                    <p>Passionné par l’art et les nouvelles Technologies. À la recherche permanente du challenge qui m’anime...</p>
-                    <p>Je vois les technologies, une voie de possibilité d'evasion plus forte que n'importe quel jeu video.(hors quake champion)</p>
-                    <a class="about-btn" href="down/CvSimpleBuirettePierre2024.pdf">CV</a>
+                    <h3>Passionné par la Tech</h3>
+                    <p>Développeur créatif et passionné par les nouvelles technologies. À la recherche permanente du challenge qui m'anime...</p>
+                    <p>Je vois dans les technologies une voie d'innovation et de création sans limites.</p>
+                    <a class="about-btn" href="down/CvSimpleBuirettePierre2024.pdf">Télécharger CV</a>
                 </div>
                 <!--col-md-12-->
                 <div class="col-md-12 col-lg-6 about-img">
@@ -269,11 +679,11 @@
             </div>
             <!--col-lg-6-->
             <div class="col-lg-6 work-skill">
-                <h3>Work Skills</h3>
-                <div class="progressbararea">
-                    <h4>Angular/Pwa <span>80%</span></h4>
+                <h3 data-aos="fade-right">Compétences Techniques</h3>
+                <div class="progressbararea" data-aos="fade-left" data-aos-delay="100">
+                    <h4>Front-end (Angular/React/PWA) <span>85%</span></h4>
                     <div class="progress">
-                        <div style="width: 80%;" class="progress-bar"></div>
+                        <div class="progress-bar skill-progress" data-width="85%" style="width: 0%"></div>
                     </div>
                 </div>
                 <div class="progressbararea">
@@ -332,40 +742,158 @@
                     <div class="progress">
                         <div style="width: 90%;" class="progress-bar"></div>
                     </div>
-                    <!--===== SKILLS SECTION =====-->
+                </div>
+                <!--===== SKILLS SECTION =====-->
 <section id="skills" class="skills-section">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-lg-12 skills-heading">
-                <h2 style="color: #fff;">Competencies</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <h2 class="section-title" data-aos="fade-up">Compétences Professionnelles</h2>
             </div>
-            <!--col-md-12-->
-            <div class="col-lg-12">
-                <ul class="skills-list">
-                    <li>Création d’un réseau FTTA (boucle structurante pendulaire et adduction)</li>
-                    <li>Création de plan de boîte / de synoptique</li>
-                    <li>Étude à partir de PIT et lecture des règles d’ingénierie opérateurs</li>
-                    <li>Création de synoptique de site mobile</li>
-                    <li>Création de plans divers : cadastre, routier, IGN...</li>
-                    <li>Réaménagement de site (pylône, terrasse, château d’eau)</li>
-                    <li>Création de DTI / DP / DIM</li>
-                    <li>Mise en place de sites neufs selon les règles d’ingénierie opérateurs</li>
-                    <li>Conception de cartes des Amers avec AutoCAD, Geoportail, Excel, IGN MAP, Google Earth</li>
-                    <li>Habilitation électrique H2V, B2V, BR, BC</li>
-                    <li>Expérience sur pylône, toiture et château d’eau</li>
-                    <li>AIPR - Opérateur</li>
-                    <li>Maîtrise de logiciels : Photoshop, Illustrator, InDesign</li>
-                    <li>Admin/BDD : MySQL</li>
-                    <li>Développement : AngularJS (OLD), Angular 14, Ionic, JS, Symfony, HTML/CSS/PHP</li>
-                    <li>Qualifications : Cases 1, 3 et 5</li>
-                    <li>Expérience en manutention, employé libre-service, et vente</li>
-                </ul>
-            </div>
-            <!--col-lg-12-->
         </div>
-        <!--row-->
+        <div class="row skills-container">
+            <!-- Télécommunications -->
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fa fa-broadcast-tower"></i>
+                    </div>
+                    <h3>Télécommunications</h3>
+                    <ul class="skill-list">
+                        <li><i class="fa fa-check"></i> <span>Réseau FTTA (boucle structurante et adduction)</span></li>
+                        <li><i class="fa fa-check"></i> <span>Création de plans de boîte et synoptiques</span></li>
+                        <li><i class="fa fa-check"></i> <span>Étude PIT et règles d'ingénierie</span></li>
+                        <li><i class="fa fa-check"></i> <span>Sites mobiles et synoptiques</span></li>
+                        <li><i class="fa fa-check"></i> <span>Réaménagement de sites (pylône, terrasse, château d'eau)</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Conception & Plans -->
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fa fa-drafting-compass"></i>
+                    </div>
+                    <h3>Conception & Plans</h3>
+                    <ul class="skill-list">
+                        <li><i class="fa fa-check"></i> <span>Plans cadastre, routier, IGN</span></li>
+                        <li><i class="fa fa-check"></i> <span>DTI / DP / DIM</span></li>
+                        <li><i class="fa fa-check"></i> <span>Cartes des Amers</span></li>
+                        <li><i class="fa fa-check"></i> <span>AutoCAD, Geoportail</span></li>
+                        <li><i class="fa fa-check"></i> <span>IGN MAP, Google Earth</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Développement -->
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fa fa-code"></i>
+                    </div>
+                    <h3>Développement</h3>
+                    <ul class="skill-list">
+                        <li><i class="fa fa-check"></i> <span>Angular 14 & AngularJS</span></li>
+                        <li><i class="fa fa-check"></i> <span>Ionic & Symfony</span></li>
+                        <li><i class="fa fa-check"></i> <span>HTML5 / CSS3 / PHP</span></li>
+                        <li><i class="fa fa-check"></i> <span>MySQL & Bases de données</span></li>
+                        <li><i class="fa fa-check"></i> <span>JavaScript & ES6+</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Design & Création -->
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fa fa-palette"></i>
+                    </div>
+                    <h3>Design & Création</h3>
+                    <ul class="skill-list">
+                        <li><i class="fa fa-check"></i> <span>Adobe Photoshop</span></li>
+                        <li><i class="fa fa-check"></i> <span>Adobe Illustrator</span></li>
+                        <li><i class="fa fa-check"></i> <span>Adobe InDesign</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Certifications & Qualifications -->
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fa fa-certificate"></i>
+                    </div>
+                    <h3>Certifications & Qualifications</h3>
+                    <ul class="skill-list">
+                        <li><i class="fa fa-check"></i> <span>Habilitation électrique H2V, B2V, BR, BC</span></li>
+                        <li><i class="fa fa-check"></i> <span>AIPR - Opérateur</span></li>
+                        <li><i class="fa fa-check"></i> <span>Qualifications Cases 1, 3 et 5</span></li>
+                        <li><i class="fa fa-check"></i> <span>Expérience sur pylône, toiture et château d'eau</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Expérience Terrain -->
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fa fa-tools"></i>
+                    </div>
+                    <h3>Expérience Terrain</h3>
+                    <ul class="skill-list">
+                        <li><i class="fa fa-check"></i> <span>Mise en place de sites neufs selon les règles d'ingénierie</span></li>
+                        <li><i class="fa fa-check"></i> <span>Expérience en manutention et logistique</span></li>
+                        <li><i class="fa fa-check"></i> <span>Gestion de projets sur site</span></li>
+                        <li><i class="fa fa-check"></i> <span>Coordination d'équipes techniques</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Outils & Technologies -->
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="700">
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fa fa-laptop-code"></i>
+                    </div>
+                    <h3>Outils & Technologies</h3>
+                    <ul class="skill-list">
+                        <li><i class="fa fa-check"></i> <span>AutoCAD, Geoportail, IGN MAP</span></li>
+                        <li><i class="fa fa-check"></i> <span>Suite Adobe (Photoshop, Illustrator, InDesign)</span></li>
+                        <li><i class="fa fa-check"></i> <span>Outils de développement modernes</span></li>
+                        <li><i class="fa fa-check"></i> <span>Systèmes de gestion de version (Git)</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Cases & Spécialisations -->
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="800">
+                <div class="skill-category cases-category">
+                    <div class="skill-icon">
+                        <i class="fa fa-forklift"></i>
+                    </div>
+                    <h3>Permis CACES</h3>
+                    <div class="cases-grid">
+                        <div class="case-item">
+                            <span class="case-number">CACES 1</span>
+                            <p>Préparateur de commandes</p>
+                            <small>Conduite de transpalettes et préparation de commandes</small>
+                        </div>
+                        <div class="case-item">
+                            <span class="case-number">CACES 3</span>
+                            <p>Chariot élévateur frontal</p>
+                            <small>Conduite de chariots élévateurs en porte-à-faux</small>
+                        </div>
+                        <div class="case-item">
+                            <span class="case-number">CACES 5</span>
+                            <p>Chariot à mât rétractable</p>
+                            <small>Conduite de chariots à mât rétractable</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!--container-->
 </section>
 <!--===== END SKILLS SECTION =====-->
 
@@ -384,76 +912,56 @@
     <!--===== SERVICES SECTION =====-->
     <section id="services" class="services-section">
         <div class="container">
-            <div class="row wow fadeIn" data-wow-delay="0.2s">
-                <div class="col-md-12 col-sm-12 services-heading">
-                    <h2>Meilleures compétences</h2>
-                    <p>melting pot of my best skills</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="section-title" data-aos="fade-up">Mes Services</h2>
                 </div>
-                <!--col-md-12-->
-                <div class="col-lg-4 col-md-6">
-                    <div class="services-text">
-                        <div class="services-content">
-                            <img src="images/services/services-webdev.png" alt="services-img1">
-                            <h3>WebDev</h3>
-                            <p>Agile d'expérience,<br> je saurai faire preuve de méthode en PHP/JS ou autre.</p>
-                        </div>
-                        <!--services-content-->
-                    </div>
-                    <!--services-text-->
-                   </div>
-                   <!--col-md-6-->
-                <div class="col-lg-4 col-md-6">
-                    <div class="services-text">
-                        <div class="services-content">
-                            <img src="images/services/services-gra.png" alt="services-img2">
-                            <h3>Graphics Design</h3>
-                          <p>J'ai les connaissances<br>en art et imprimerie, enseignés à Saint-Luc Tournai.</p>
-                        </div>
-                        <!--services-content-->
-                    </div>
-                    <!--services-text-->
-                   </div>
-                   <!--col-md-4-->
-                <div class="col-lg-4 col-md-6">
-                    <div class="services-text">
-                        <div class="services-content">
-                            <img src="images/services/services-maker.png" alt="services-img3">
-                            <h3>TEch and IotMakers</h3>
-                          <p>La bidouille de Raspberry et Arduino et l'un de mes passe-temps préférer.</p>
-                        </div>
-                        <!--services-content-->
-                    </div>
-                    <!--services-text-->
-                   </div>
-                   <!--col-md-6-->
-                <div class="col-lg-4 col-md-6">
-                    <div class="services-text">
-                        <div class="services-content">
-                            <img src="images/services/services-inov.png" alt="services-img4">
-                            <h3>Innovation</h3>
-                         <p>En perpétuelle amélioration j'aime apprendre les diverses technologie de demain. (ex: L'impression 3D)</p>
-                        </div>
-                        <!--services-content-->
-                    </div>
-                    <!--services-text-->
-                   </div>
-                   <!--col-md-6-->
-                <div class="col-lg-4 col-md-6">
-                    <div class="services-text">
-                        <div class="services-content">
-                            <img src="images/services/services-antenne.png" alt="antenne">
-                            <h3>Agent Bureau D'étude</h3>
-                         <p>Utilisation d'AutoCAD pour la projection de plan pour site d'antennes resaux mobile 3G/4G/5G</p>
-                        </div>
-                        <!--services-content-->
-                    </div>
-                    <!--services-text-->
-                   </div>
-                   <!--col-md-6-->
             </div>
-            <!--row-->
+            <div class="row">
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
+                    <div class="services-content">
+                        <div class="service-icon">
+                            <i class="fa fa-code fa-3x"></i>
+                        </div>
+                        <h3>Développement Web</h3>
+                        <p>Applications modernes et performantes</p>
+                        <ul class="service-list">
+                            <li><i class="fa fa-check"></i> Angular / React</li>
+                            <li><i class="fa fa-check"></i> Node.js / PHP</li>
+                            <li><i class="fa fa-check"></i> API REST</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
+                    <div class="services-content">
+                        <div class="service-icon">
+                            <i class="fa fa-mobile fa-3x"></i>
+                        </div>
+                        <h3>Apps Mobiles</h3>
+                        <p>Solutions cross-platform innovantes</p>
+                        <ul class="service-list">
+                            <li><i class="fa fa-check"></i> PWA</li>
+                            <li><i class="fa fa-check"></i> React Native</li>
+                            <li><i class="fa fa-check"></i> Ionic</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="300">
+                    <div class="services-content">
+                        <div class="service-icon">
+                            <i class="fa fa-cloud fa-3x"></i>
+                        </div>
+                        <h3>Cloud & DevOps</h3>
+                        <p>Architecture cloud scalable</p>
+                        <ul class="service-list">
+                            <li><i class="fa fa-check"></i> AWS / Azure</li>
+                            <li><i class="fa fa-check"></i> Docker / CI/CD</li>
+                            <li><i class="fa fa-check"></i> Microservices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!--container-->
     </section>
     <!--============== END SERVICES SECTION ===============-->
     
@@ -630,7 +1138,18 @@
                 <p>buirette.pierre@gmail.com</p>
                 </div>
                 </div>
-              
+                <div class="contact-text-details">
+                    <i class="fa fa-linkedin"></i>
+                    <div class="contact-text-details-content">
+                        <p><a href="https://www.linkedin.com/in/pierre-buirette/" target="_blank">LinkedIn</a></p>
+                    </div>
+                </div>
+                <div class="contact-text-details">
+                    <i class="fa fa-github"></i>
+                    <div class="contact-text-details-content">
+                        <p><a href="https://github.com/nyxover" target="_blank">GitHub</a></p>
+                    </div>
+                </div>
                 <!--contact-text-details2-->
                 </div>
                 <!--col-md-4-->
@@ -676,5 +1195,40 @@
     <script src="js/wow.js"></script>
     <script src="js/active-scroll-nav.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Initialisation des tooltips
+        tippy('[data-tippy-content]', {
+            animation: 'scale',
+            theme: 'light'
+        });
+
+        // Modification du script d'animation des barres de progression
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.skill-progress');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const width = entry.target.getAttribute('data-width');
+                        entry.target.style.width = width;
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            progressBars.forEach(bar => {
+                observer.observe(bar);
+            });
+        });
+    </script>
 </body>
 </html>
