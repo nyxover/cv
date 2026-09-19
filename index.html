@@ -1080,7 +1080,7 @@
                         <div class="single-work github-work">
                         <div class="work-content">
                         <h4>Mes derniers dépôts GitHub</h4>
-                        <ul id="github-activity" class="github-activity" aria-live="polite">
+                        <ul class="github-activity" aria-live="polite">
                             <li>Chargement...</li>
                         </ul>
                         </div>
@@ -1243,14 +1243,19 @@
                 observer.observe(bar);
             });
 
-            const githubActivity = document.getElementById('github-activity');
+            const updateGithubActivities = markup => {
+                document.querySelectorAll('.github-activity').forEach(githubActivity => {
+                    githubActivity.innerHTML = markup;
+                });
+            };
+
             const renderRepositories = repositories => {
                 if (!repositories.length) {
-                    githubActivity.innerHTML = '<li>Aucun dépôt public récent.</li>';
+                    updateGithubActivities('<li>Aucun dépôt public récent.</li>');
                     return;
                 }
 
-                githubActivity.innerHTML = repositories.map(repository => {
+                const repositoriesMarkup = repositories.map(repository => {
                     const description = repository.description || 'Aucune description';
                     const language = repository.language || 'Langage non précisé';
                     const updatedAt = new Date(repository.updated_at).toLocaleDateString('fr-FR');
@@ -1261,6 +1266,8 @@
                         <small>${language} · Mis à jour le ${updatedAt}</small>
                     </li>`;
                 }).join('');
+
+                updateGithubActivities(repositoriesMarkup);
             };
 
             fetch('https://api.github.com/users/nyxover/repos?sort=updated&direction=desc&per_page=3')
@@ -1284,10 +1291,9 @@
                     const message = error.message.includes('(403)')
                         ? 'Limite GitHub atteinte. Réessayez plus tard.'
                         : 'Activité temporairement indisponible.';
-                    githubActivity.innerHTML = `<li>${message}</li>`;
+                    updateGithubActivities(`<li>${message}</li>`);
                 });
         })();
     </script>
 </body>
 </html>
-
