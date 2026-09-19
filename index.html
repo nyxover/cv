@@ -1209,19 +1209,23 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
     <script>
-        AOS.init({
-            duration: 800,
-            once: true
-        });
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                once: true
+            });
+        }
 
         // Initialisation des tooltips
-        tippy('[data-tippy-content]', {
-            animation: 'scale',
-            theme: 'light'
-        });
+        if (typeof tippy === 'function') {
+            tippy('[data-tippy-content]', {
+                animation: 'scale',
+                theme: 'light'
+            });
+        }
 
         // Modification du script d'animation des barres de progression
-        document.addEventListener('DOMContentLoaded', function() {
+        (function() {
             const progressBars = document.querySelectorAll('.skill-progress');
             
             const observer = new IntersectionObserver((entries) => {
@@ -1282,7 +1286,7 @@
                         : 'Activité temporairement indisponible.';
                     githubActivity.innerHTML = `<li>${message}</li>`;
                 });
-        });
+        })();
     </script>
 </body>
 </html>
