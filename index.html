@@ -1078,11 +1078,11 @@
                         </div>
                         <!-- Activite GitHub -->
                         <div class="single-work github-work">
-                        <img src="images/works/works-1.jpg" alt="Activite recente sur GitHub">
                         <div class="work-content">
-                        <h4>Activite recente sur GitHub</h4>
-                        <div id="github-activity" class="github-activity" aria-live="polite">Chargement...</div>
-                        <a class="work-btn" href="https://github.com/nyxover?tab=repositories" target="_blank" rel="noopener noreferrer">Voir GitHub</a>
+                        <h4>Mes derniers dépôts GitHub</h4>
+                        <ul id="github-activity" class="github-activity" aria-live="polite">
+                            <li>Chargement...</li>
+                        </ul>
                         </div>
                         </div>
                     </div>
@@ -1249,16 +1249,24 @@
                 })
                 .then(repositories => {
                     if (!repositories.length) {
-                        githubActivity.textContent = 'Aucun depot public recent.';
+                        githubActivity.innerHTML = '<li>Aucun dépôt public récent.</li>';
                         return;
                     }
 
-                    githubActivity.innerHTML = repositories.map(repository =>
-                        `<a href="${repository.html_url}" target="_blank" rel="noopener noreferrer">${repository.name}</a>`
-                    ).join('');
+                    githubActivity.innerHTML = repositories.map(repository => {
+                        const description = repository.description || 'Aucune description';
+                        const language = repository.language || 'Langage non précisé';
+                        const updatedAt = new Date(repository.updated_at).toLocaleDateString('fr-FR');
+
+                        return `<li>
+                            <a href="${repository.html_url}" target="_blank" rel="noopener noreferrer">${repository.name}</a>
+                            <span>${description}</span>
+                            <small>${language} · Mis à jour le ${updatedAt}</small>
+                        </li>`;
+                    }).join('');
                 })
                 .catch(() => {
-                    githubActivity.textContent = 'Activite temporairement indisponible.';
+                    githubActivity.innerHTML = '<li>Activité temporairement indisponible.</li>';
                 });
         });
     </script>
