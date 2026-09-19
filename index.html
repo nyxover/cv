@@ -1200,7 +1200,7 @@
     <script src="js/jquery-validator.js"></script>
     <script src="js/waypoints.min.js"></script>
     <script src="js/jquery.meanmenu.js"></script>
-    <script src="js/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/wow.js"></script>
     <script src="js/active-scroll-nav.js"></script>
@@ -1240,33 +1240,47 @@
             });
 
             const githubActivity = document.getElementById('github-activity');
+            const renderRepositories = repositories => {
+                if (!repositories.length) {
+                    githubActivity.innerHTML = '<li>Aucun dépôt public récent.</li>';
+                    return;
+                }
+
+                githubActivity.innerHTML = repositories.map(repository => {
+                    const description = repository.description || 'Aucune description';
+                    const language = repository.language || 'Langage non précisé';
+                    const updatedAt = new Date(repository.updated_at).toLocaleDateString('fr-FR');
+
+                    return `<li>
+                        <a href="${repository.html_url}" target="_blank" rel="noopener noreferrer">${repository.name}</a>
+                        <span>${description}</span>
+                        <small>${language} · Mis à jour le ${updatedAt}</small>
+                    </li>`;
+                }).join('');
+            };
+
             fetch('https://api.github.com/users/nyxover/repos?sort=updated&direction=desc&per_page=3')
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('GitHub API indisponible');
+                        throw new Error(`GitHub API indisponible (${response.status})`);
                     }
                     return response.json();
                 })
                 .then(repositories => {
-                    if (!repositories.length) {
-                        githubActivity.innerHTML = '<li>Aucun dépôt public récent.</li>';
+                    localStorage.setItem('github-repositories', JSON.stringify(repositories));
+                    renderRepositories(repositories);
+                })
+                .catch(error => {
+                    const cachedRepositories = localStorage.getItem('github-repositories');
+                    if (cachedRepositories) {
+                        renderRepositories(JSON.parse(cachedRepositories));
                         return;
                     }
 
-                    githubActivity.innerHTML = repositories.map(repository => {
-                        const description = repository.description || 'Aucune description';
-                        const language = repository.language || 'Langage non précisé';
-                        const updatedAt = new Date(repository.updated_at).toLocaleDateString('fr-FR');
-
-                        return `<li>
-                            <a href="${repository.html_url}" target="_blank" rel="noopener noreferrer">${repository.name}</a>
-                            <span>${description}</span>
-                            <small>${language} · Mis à jour le ${updatedAt}</small>
-                        </li>`;
-                    }).join('');
-                })
-                .catch(() => {
-                    githubActivity.innerHTML = '<li>Activité temporairement indisponible.</li>';
+                    const message = error.message.includes('(403)')
+                        ? 'Limite GitHub atteinte. Réessayez plus tard.'
+                        : 'Activité temporairement indisponible.';
+                    githubActivity.innerHTML = `<li>${message}</li>`;
                 });
         });
     </script>
