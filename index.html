@@ -1076,6 +1076,15 @@
                         <a class="work-btn" href="presta/3dPrint/index.html">Tarifs</a>
                         </div>
                         </div>
+                        <!-- Activite GitHub -->
+                        <div class="single-work github-work">
+                        <img src="images/works/works-1.jpg" alt="Activite recente sur GitHub">
+                        <div class="work-content">
+                        <h4>Activite recente sur GitHub</h4>
+                        <div id="github-activity" class="github-activity" aria-live="polite">Chargement...</div>
+                        <a class="work-btn" href="https://github.com/nyxover?tab=repositories" target="_blank" rel="noopener noreferrer">Voir GitHub</a>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1229,6 +1238,28 @@
             progressBars.forEach(bar => {
                 observer.observe(bar);
             });
+
+            const githubActivity = document.getElementById('github-activity');
+            fetch('https://api.github.com/users/nyxover/repos?sort=updated&direction=desc&per_page=3')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('GitHub API indisponible');
+                    }
+                    return response.json();
+                })
+                .then(repositories => {
+                    if (!repositories.length) {
+                        githubActivity.textContent = 'Aucun depot public recent.';
+                        return;
+                    }
+
+                    githubActivity.innerHTML = repositories.map(repository =>
+                        `<a href="${repository.html_url}" target="_blank" rel="noopener noreferrer">${repository.name}</a>`
+                    ).join('');
+                })
+                .catch(() => {
+                    githubActivity.textContent = 'Activite temporairement indisponible.';
+                });
         });
     </script>
 </body>
