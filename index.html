@@ -44,6 +44,111 @@
             width: 0;
             transition: width 1.5s ease-in-out;
         }
+
+        .ai-skill-progress p {
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 15px;
+            line-height: 1.65;
+            margin: 0 0 12px;
+        }
+
+        .ai-skill-progress h4 {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .ai-glitch {
+            color: #d7ff00;
+            font-family: 'Courier New', monospace;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-shadow: 2px 0 #ff00e5, -2px 0 #00f7ff;
+            animation: ai-glitch 1.2s steps(2, end) infinite;
+        }
+
+        .ai-progress {
+            background: #172000;
+            border: 1px solid rgba(215, 255, 0, 0.75);
+            box-shadow: 0 0 8px rgba(215, 255, 0, 0.45), inset 0 0 6px rgba(215, 255, 0, 0.2);
+            height: 13px;
+            overflow: hidden;
+        }
+
+        .ai-progress-bar {
+            background: repeating-linear-gradient(115deg, #d7ff00 0 8px, #a6ff00 8px 14px, #00f7ff 14px 17px);
+            box-shadow: 0 0 12px #d7ff00, 0 0 20px rgba(0, 247, 255, 0.8);
+            animation: ai-progress-flicker 0.9s steps(2, end) infinite;
+        }
+
+        .services-section .services-content {
+            min-height: 100%;
+        }
+
+        .services-section .service-list li {
+            line-height: 1.5;
+        }
+
+        .works-section .single-work {
+            position: relative;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .works-section .single-work > img,
+        .works-section .work-image-link img {
+            display: block;
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .works-section .work-image-link {
+            display: block;
+        }
+
+        .works-section .single-work:not(.github-work) .work-content {
+            inset: auto 0 0;
+            margin: 0;
+            padding: 24px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+        }
+
+        .works-section .github-work .work-content {
+            min-height: 610px;
+        }
+
+        .contact-text-details-content a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contact-text-details-content a:hover,
+        .contact-text-details-content a:focus {
+            color: #fb6930;
+            text-decoration: underline;
+        }
+
+        @keyframes ai-glitch {
+            0%, 85%, 100% { transform: translate(0); opacity: 1; }
+            87% { transform: translate(-2px, 1px); opacity: 0.7; }
+            90% { transform: translate(2px, -1px); opacity: 1; }
+            94% { transform: translate(-1px, 0); opacity: 0.8; }
+        }
+
+        @keyframes ai-progress-flicker {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5) saturate(1.4); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ai-glitch,
+            .ai-progress-bar {
+                animation: none;
+            }
+        }
         
         .floating {
             animation: floating 3s ease-in-out infinite;
@@ -603,13 +708,13 @@
             <div class="col-lg-6 skill-area">
                 <div class="row">
                     <div class="col-12 skill-area-heading">
-                        <h3>Expertise Area</h3>
+                        <h3>Expérience professionnelle</h3>
                     </div>
                     <!-- Each experience block starts here -->
                     <div class="col-12 skill-area-content">
-                        <h4>Developpeur Full Stack</h4>
+                        <h4>Développeur full stack</h4>
                         <p>Mars 2023 – Aujourd’hui</p>
-                        <p>CGI: PHP, JAVA, Angular, Python</p>
+                        <p>CGI : PHP, Java, Angular, Python</p>
                         <hr>
                     </div>
                     <div class="col-12 skill-area-content">
@@ -680,7 +785,7 @@
                     </div>
                     <div class="col-12 skill-area-content">
                         <h4>Plongeur</h4>
-                        <p>Restaurant L'Atelier de Cerisier de Lens</p>
+                        <p>Restaurant L'Atelier du Cerisier, Lens</p>
                         <hr>
                     </div>
                 </div>
@@ -696,13 +801,13 @@
                     </div>
                 </div>
                 <div class="progressbararea">
-                    <h4>Php/Js <span>70%</span></h4>
+                    <h4>PHP / JavaScript <span>70%</span></h4>
                     <div class="progress">
                         <div style="width: 70%;" class="progress-bar"></div>
                     </div>
                 </div>
                 <div class="progressbararea">
-                    <h4>Web Design: PackAdobe <span>90%</span></h4>
+                    <h4>Web design et Suite Adobe <span>90%</span></h4>
                     <div class="progress">
                         <div style="width: 90%;" class="progress-bar"></div>
                     </div>
@@ -725,9 +830,15 @@
                         <div style="width: 85%;" class="progress-bar"></div>
                     </div>
                 </div>
+                <div class="progressbararea ai-skill-progress">
+                    <h4>Développement assisté par l’IA <span class="ai-glitch" aria-label="100 %, affichage volontairement glitché">1Ø0%</span></h4>
+                    <p>J’utilise OpenCode et l’IA pour explorer des solutions, écrire du code et accélérer le débogage, tout en gardant la maîtrise de la qualité.</p>
+                    <div class="progress ai-progress" role="progressbar" aria-label="Progression visuelle de la compétence IA" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+                        <div class="progress-bar ai-progress-bar" style="width: 100%;"></div>
+                    </div>
+                </div>
 
-                <!-- Adding Soft Skills section -->
-                <h3>Soft Skills</h3>
+                <h3>Compétences comportementales</h3>
                 <div class="progressbararea">
                     <h4>Communication <span>85%</span></h4>
                     <div class="progress">
@@ -735,29 +846,35 @@
                     </div>
                 </div>
                 <div class="progressbararea">
-                    <h4>Teamwork <span>80%</span></h4>
+                    <h4>Travail en équipe <span>80%</span></h4>
                     <div class="progress">
                         <div style="width: 80%;" class="progress-bar"></div>
                     </div>
                 </div>
                 <div class="progressbararea">
-                    <h4>Problem-solving <span>75%</span></h4>
+                    <h4>Résolution de problèmes <span>75%</span></h4>
                     <div class="progress">
                         <div style="width: 75%;" class="progress-bar"></div>
                     </div>
                 </div>
                 <div class="progressbararea">
-                    <h4>Adaptability <span>90%</span></h4>
+                    <h4>Adaptabilité <span>90%</span></h4>
                     <div class="progress">
                         <div style="width: 90%;" class="progress-bar"></div>
                     </div>
                 </div>
-                <!--===== SKILLS SECTION =====-->
+            </div>
+        </div>
+    </div>
+</section>
+<!--===== END EXPERIENCE SECTION =====-->
+
+<!--===== SKILLS SECTION =====-->
 <section id="skills" class="skills-section">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <h2 class="section-title" data-aos="fade-up">Compétences Professionnelles</h2>
+                <h2 class="section-title" data-aos="fade-up">Compétences professionnelles</h2>
             </div>
         </div>
         <div class="row skills-container">
@@ -765,7 +882,7 @@
             <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="skill-category">
                     <div class="skill-icon">
-                        <i class="fa fa-broadcast-tower"></i>
+                        <i class="fa fa-signal"></i>
                     </div>
                     <h3>Télécommunications</h3>
                     <ul class="skill-list">
@@ -782,7 +899,7 @@
             <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="skill-category">
                     <div class="skill-icon">
-                        <i class="fa fa-drafting-compass"></i>
+                        <i class="fa fa-map-o"></i>
                     </div>
                     <h3>Conception & Plans</h3>
                     <ul class="skill-list">
@@ -803,11 +920,12 @@
                     </div>
                     <h3>Développement</h3>
                     <ul class="skill-list">
-                        <li><i class="fa fa-check"></i> <span>Angular 14 & AngularJS</span></li>
-                        <li><i class="fa fa-check"></i> <span>Ionic & Symfony</span></li>
-                        <li><i class="fa fa-check"></i> <span>HTML5 / CSS3 / PHP</span></li>
-                        <li><i class="fa fa-check"></i> <span>MySQL & Bases de données</span></li>
-                        <li><i class="fa fa-check"></i> <span>JavaScript & ES6+</span></li>
+                        <li><i class="fa fa-check"></i> <span>Angular, React et AngularJS</span></li>
+                        <li><i class="fa fa-check"></i> <span>Ionic, Symfony et Rust</span></li>
+                        <li><i class="fa fa-check"></i> <span>HTML5 / CSS3 / PHP / Python</span></li>
+                        <li><i class="fa fa-check"></i> <span>MySQL et bases de données</span></li>
+                        <li><i class="fa fa-check"></i> <span>JavaScript (ES6+)</span></li>
+                        <li><i class="fa fa-check"></i> <span>Développement assisté par l’IA avec OpenCode</span></li>
                     </ul>
                 </div>
             </div>
@@ -816,7 +934,7 @@
             <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="400">
                 <div class="skill-category">
                     <div class="skill-icon">
-                        <i class="fa fa-palette"></i>
+                        <i class="fa fa-paint-brush"></i>
                     </div>
                     <h3>Design & Création</h3>
                     <ul class="skill-list">
@@ -847,7 +965,7 @@
             <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="600">
                 <div class="skill-category">
                     <div class="skill-icon">
-                        <i class="fa fa-tools"></i>
+                        <i class="fa fa-wrench"></i>
                     </div>
                     <h3>Expérience Terrain</h3>
                     <ul class="skill-list">
@@ -863,13 +981,14 @@
             <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="700">
                 <div class="skill-category">
                     <div class="skill-icon">
-                        <i class="fa fa-laptop-code"></i>
+                        <i class="fa fa-laptop"></i>
                     </div>
                     <h3>Outils & Technologies</h3>
                     <ul class="skill-list">
                         <li><i class="fa fa-check"></i> <span>AutoCAD, Geoportail, IGN MAP</span></li>
                         <li><i class="fa fa-check"></i> <span>Suite Adobe (Photoshop, Illustrator, InDesign)</span></li>
-                        <li><i class="fa fa-check"></i> <span>Outils de développement modernes</span></li>
+                        <li><i class="fa fa-check"></i> <span>Android Studio</span></li>
+                        <li><i class="fa fa-check"></i> <span>OpenCode et outils d’IA pour le développement</span></li>
                         <li><i class="fa fa-check"></i> <span>Systèmes de gestion de version (Git)</span></li>
                     </ul>
                 </div>
@@ -879,7 +998,7 @@
             <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="800">
                 <div class="skill-category cases-category">
                     <div class="skill-icon">
-                        <i class="fa fa-forklift"></i>
+                        <i class="fa fa-truck"></i>
                     </div>
                     <h3>Permis CACES</h3>
                     <div class="cases-grid">
@@ -906,18 +1025,6 @@
 </section>
 <!--===== END SKILLS SECTION =====-->
 
-                </div>
-            </div>
-            
-            <!--col-lg-6-->
-        </div>
-        <!--row-->
-    </div>
-    <!--container-->
-    
-</section>
-<!--============== END EXPERIENCE SECTION ===============-->
-
     <!--===== SERVICES SECTION =====-->
     <section id="services" class="services-section">
         <div class="container">
@@ -927,45 +1034,59 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
+                <div class="col-md-6 col-lg-6" data-aos="flip-left" data-aos-delay="100">
                     <div class="services-content">
                         <div class="service-icon">
                             <i class="fa fa-code fa-3x"></i>
                         </div>
-                        <h3>Développement Web</h3>
-                        <p>Applications modernes et performantes</p>
+                        <h3>Applications web & collaboratives</h3>
+                        <p>Des applications utiles, modernes et adaptées à vos besoins, du front-end aux API.</p>
                         <ul class="service-list">
-                            <li><i class="fa fa-check"></i> Angular / React</li>
-                            <li><i class="fa fa-check"></i> Node.js / PHP</li>
-                            <li><i class="fa fa-check"></i> API REST</li>
+                            <li><i class="fa fa-check"></i> Sites et applications web</li>
+                            <li><i class="fa fa-check"></i> Outils collaboratifs et temps réel</li>
+                            <li><i class="fa fa-check"></i> Interfaces React / Angular, API et intégrations</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
+                <div class="col-md-6 col-lg-6" data-aos="flip-left" data-aos-delay="200">
                     <div class="services-content">
                         <div class="service-icon">
                             <i class="fa fa-mobile fa-3x"></i>
                         </div>
-                        <h3>Apps Mobiles</h3>
-                        <p>Solutions cross-platform innovantes</p>
+                        <h3>Expériences mobiles & outils sur mesure</h3>
+                        <p>Des expériences pensées pour le mobile et des outils pratiques pour simplifier les usages.</p>
                         <ul class="service-list">
-                            <li><i class="fa fa-check"></i> PWA</li>
-                            <li><i class="fa fa-check"></i> React Native</li>
-                            <li><i class="fa fa-check"></i> Ionic</li>
+                            <li><i class="fa fa-check"></i> Applications web adaptées au mobile et PWA</li>
+                            <li><i class="fa fa-check"></i> Prototypes et interfaces Android</li>
+                            <li><i class="fa fa-check"></i> Outils de comparaison, suivi et import de données</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="flip-left" data-aos-delay="300">
+                <div class="col-md-6 col-lg-6" data-aos="flip-left" data-aos-delay="300">
                     <div class="services-content">
                         <div class="service-icon">
-                            <i class="fa fa-cloud fa-3x"></i>
+                            <i class="fa fa-lightbulb-o fa-3x"></i>
                         </div>
-                        <h3>Cloud & DevOps</h3>
-                        <p>Architecture cloud scalable</p>
+                        <h3>Prototypes IA & assistants de code</h3>
+                        <p>Des assistants et fonctionnalités intelligentes intégrés à des outils numériques.</p>
                         <ul class="service-list">
-                            <li><i class="fa fa-check"></i> AWS / Azure</li>
-                            <li><i class="fa fa-check"></i> Docker / CI/CD</li>
-                            <li><i class="fa fa-check"></i> Microservices</li>
+                            <li><i class="fa fa-check"></i> Prototypage d’assistants IA</li>
+                            <li><i class="fa fa-check"></i> Aide au développement et à la collaboration</li>
+                            <li><i class="fa fa-check"></i> Intégration de services IA aux applications</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6" data-aos="flip-left" data-aos-delay="400">
+                    <div class="services-content">
+                        <div class="service-icon">
+                            <i class="fa fa-music fa-3x"></i>
+                        </div>
+                        <h3>Outils audio & MIDI</h3>
+                        <p>Des prototypes créatifs autour de la voix, du son et de la production musicale.</p>
+                        <ul class="service-list">
+                            <li><i class="fa fa-check"></i> Détection de notes chantées et conversion en MIDI</li>
+                            <li><i class="fa fa-check"></i> Prototypes audio web et mobiles</li>
+                            <li><i class="fa fa-check"></i> Expérimentations de plugins audio</li>
                         </ul>
                     </div>
                 </div>
@@ -1042,8 +1163,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 work-heading">
-                    <h2>My Works</h2>
-                   <p>The Section My Works in progress...</p>
+                    <h2>Mes projets</h2>
+                    <p>Projets récents, prototypes et outils en ligne.</p>
                 </div>
                 <!--col-md-12-->
             </div>
@@ -1057,7 +1178,7 @@
                         <!-- Activite GitHub -->
                         <div class="single-work github-work">
                         <div class="work-content">
-                        <h4>Mes derniers dépôts GitHub</h4>
+                        <h4>Mes 6 derniers dépôts GitHub</h4>
                         <ul class="github-activity" aria-live="polite">
                             <li>Chargement...</li>
                         </ul>
@@ -1088,10 +1209,12 @@
                         </div>
                         <!--single-work-->
                         <div class="single-work">
-                        <img src="images/works/works-4.jpg" alt="works-4">
+                        <a class="work-image-link" href="https://nyxover.ovh" target="_blank" rel="noopener noreferrer" aria-label="Découvrir nyxOS sur nyxover.ovh">
+                            <img src="images/works/nyxos-screenshot.png" alt="Capture du portail nyxover.ovh et de son interface nyxOS" loading="lazy">
+                        </a>
                         <div class="work-content">
-                        <h4>Impression 3D sur demande:</h4>
-                        <a class="work-btn" href="presta/3dPrint/index.html">Tarifs</a>
+                        <h4>nyxOS</h4>
+                        <a class="work-btn" href="https://nyxover.ovh" target="_blank" rel="noopener noreferrer">Découvrir nyxOS</a>
                         </div>
                         </div>
                     </div>
@@ -1138,35 +1261,27 @@
                 <div class="col-md-4 contact-text">
                 <h4>Info</h4>
                 <div class="contact-text-details">
-                <i class="fa fa-home"></i>
-                <div class="contact-text-details-content">
-                <p>201 rue durutte<br> 59500 Douai France</p>
-                </div>
-                </div>
-                <!--contact-text-details-->
-                <div class="contact-text-details">
-                <i class="fa fa-phone"></i>
-                <div class="contact-text-details-content">
-                <p>+33 0680518092</p>
-                </div>
-                </div>
-                <!--contact-text-details-->
-                <div class="contact-text-details">
-                <i class="fa fa-envelope"></i>
-                <div class="contact-text-details-content">
-                <p>buirette.pierre@gmail.com</p>
-                </div>
-                </div>
-                <div class="contact-text-details">
-                    <i class="fa fa-linkedin"></i>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
                     <div class="contact-text-details-content">
-                        <p><a href="https://www.linkedin.com/in/pierre-buirette/" target="_blank">LinkedIn</a></p>
+                        <p><a href="mailto:buirette.pierre@gmail.com">buirette.pierre@gmail.com</a></p>
                     </div>
                 </div>
                 <div class="contact-text-details">
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
                     <div class="contact-text-details-content">
-                        <p><a href="https://github.com/nyxover" target="_blank">GitHub</a></p>
+                        <p><a href="https://www.linkedin.com/in/pierre-buirette/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+                    </div>
+                </div>
+                <div class="contact-text-details">
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                    <div class="contact-text-details-content">
+                        <p><a href="https://github.com/nyxover" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+                    </div>
+                </div>
+                <div class="contact-text-details">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    <div class="contact-text-details-content">
+                        <p><a href="https://nyxover.ovh" target="_blank" rel="noopener noreferrer">nyxover.ovh — nyxOS</a></p>
                     </div>
                 </div>
                 <!--contact-text-details2-->
@@ -1184,9 +1299,9 @@
         <div class="container copyright-wrapper">
             <div class="row">
                 <div class="col-md-12 copyright-social text-center">
-                    <a href="https://twitter.com/nyxover"><i class="fa fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com/in/pierre-buirette/"><i class="fa fa-linkedin"></i></a>
-                    <a href="https://plus.google.com/+pierrebuirette"><i class="fa fa-google-plus"></i></a>
+                    <a href="https://www.linkedin.com/in/pierre-buirette/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa fa-linkedin"></i></a>
+                    <a href="https://github.com/nyxover" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa fa-github"></i></a>
+                    <a href="https://nyxover.ovh" target="_blank" rel="noopener noreferrer" aria-label="nyxover.ovh — nyxOS"><i class="fa fa-globe"></i></a>
                 </div>
                 <!--col-md-12-->
                 <div class="col-md-12 copyright-text text-center">
@@ -1264,7 +1379,7 @@
                     return;
                 }
 
-                const repositoriesMarkup = repositories.map(repository => {
+                const repositoriesMarkup = repositories.slice(0, 6).map(repository => {
                     const description = repository.description || 'Aucune description';
                     const language = repository.language || 'Langage non précisé';
                     const updatedAt = new Date(repository.updated_at).toLocaleDateString('fr-FR');
@@ -1279,7 +1394,7 @@
                 updateGithubActivities(repositoriesMarkup);
             };
 
-            fetch('https://api.github.com/users/nyxover/repos?sort=updated&direction=desc&per_page=3')
+            fetch('https://api.github.com/users/nyxover/repos?per_page=100&sort=updated&direction=desc')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`GitHub API indisponible (${response.status})`);
@@ -1287,8 +1402,9 @@
                     return response.json();
                 })
                 .then(repositories => {
-                    localStorage.setItem('github-repositories', JSON.stringify(repositories));
-                    renderRepositories(repositories);
+                    const recentRepositories = repositories.filter(repository => !repository.fork).slice(0, 6);
+                    localStorage.setItem('github-repositories', JSON.stringify(recentRepositories));
+                    renderRepositories(recentRepositories);
                 })
                 .catch(error => {
                     const cachedRepositories = localStorage.getItem('github-repositories');
